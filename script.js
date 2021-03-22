@@ -1,18 +1,25 @@
-const btn = document.querySelector('#sendBtn');
-const input = document.querySelector('#messageIn');
-const message = document.querySelector('#messageOut');
+const btns = document.querySelectorAll('.btn');
+const screen = document.querySelector('.screen');
+const equalBtn = document.querySelector('.btn-equal');
+const clearBtn = document.querySelector('.btn-clear');
 
-btn.addEventListener('click' , submitMessage);
+for(let i=0 ;i < btns.length ; i++) {
+  btns[i].addEventListener('click', function() {
+    let number = btns[i].getAttribute('data-num');
+    screen.value += number;
+  })
+}
 
-function submitMessage() {
-  let content = input.value;
-
-  if(content==="") {
-    alert('please fill in the box');
+equalBtn.addEventListener('click', function() {
+  if(screen.value === '') {
+    alert('input is empty')
   } else {
-    message.innerHTML = content;
-    input.value = "";
-  };
+    let value = eval(screen.value);
+    screen.value = value;
+  }
+})
 
-  
-};
+
+clearBtn.addEventListener('click', function() {
+  screen.value = '';
+})
